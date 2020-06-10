@@ -1,0 +1,26 @@
+<% content_for :title { "#{@customer.first_name}'s Order History" } %>
+
+<table>
+  <thead>
+    <tr>
+      <th>Date</th>
+      <th># of Products</th>
+      <th>Total</th>
+    </tr>
+  </thead>
+  <tbody>
+
+    <% @customer.orders.each do |order| %>
+      <tr>
+        <td><%= order.date_created %></td>
+        <td><%= order.line_items.sum(:quantity) %></td>
+        <td><%= number_to_currency(order.subtotal_inc_tax) %></td>
+      </tr>
+    <% end %>
+
+    <tr>
+      <td colspan="2">Lifetime Value</td>
+      <td><%= number_to_currency(@lifetime_value) %></td>
+    </tr>
+  </tbody>
+</table>

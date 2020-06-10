@@ -1,0 +1,20 @@
+<% content_for :title { 'Customers' } %>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th># of Orders</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @customers.each do |customer| %>
+      <tr>
+        <td><%= link_to "#{customer.first_name} #{customer.last_name}", customer_path(customer) %></td>
+        <td>
+          <%= customer.orders.count %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
