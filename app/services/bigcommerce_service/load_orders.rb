@@ -6,6 +6,8 @@ module BigcommerceService
     class << self
       # rubocop:disable Metrics/MethodLength, Metrics/AbcSize
       def call
+        # Data is limited to 50 entries per page
+        # Need to calculate number of pages so that we get all entries from API
         order_count = Bigcommerce::Order.count.count
         number_of_pages = (order_count / 50.0).ceil
 
@@ -15,6 +17,7 @@ module BigcommerceService
               new_order = Order.create(order_params(order))
 
               product_url = order.products[:url]
+              # Add line items from the order
               line_items = JSON.parse(Bigcommerce::Order.raw_request(:get, product_url).body)
               line_items.each do |line_item|
                 new_order.line_items.create(line_item_params(line_item))

@@ -8,6 +8,7 @@
 
 - Added Service classes (Used them to import data from Bigcommerce)
 - Run `rake bc:load_data` to get the initial content from the API
+- Start the server and you are good to go
 
 ### Assumptions, Notes and Future information
 - Did not add validation in the models

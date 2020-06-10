@@ -7,6 +7,8 @@ module BigcommerceService
       # rubocop:disable Metrics/MethodLength, Metrics/AbcSize
       def call
         all_customers = []
+        # Data is limited to 50 entries per page
+        # Need to calculate number of pages so that we get all entries from API
         customer_count = Bigcommerce::Customer.count.count
         number_of_pages = (customer_count / 50.0).ceil
 
